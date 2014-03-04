@@ -251,24 +251,24 @@ Function.prototype.closureListener = function() {
 
 var nicEditorConfig = bkClass.extend({
 	buttons : {
-		'bold' : {name : __('Click to Bold'), command : 'Bold', tags : ['B','STRONG'], css : {'font-weight' : 'bold'}, key : 'b'},
-		'italic' : {name : __('Click to Italic'), command : 'Italic', tags : ['EM','I'], css : {'font-style' : 'italic'}, key : 'i'},
-		'underline' : {name : __('Click to Underline'), command : 'Underline', tags : ['U'], css : {'text-decoration' : 'underline'}, key : 'u'},
-		'left' : {name : __('Left Align'), command : 'justifyleft', noActive : true},
-		'center' : {name : __('Center Align'), command : 'justifycenter', noActive : true},
-		'right' : {name : __('Right Align'), command : 'justifyright', noActive : true},
-		'justify' : {name : __('Justify Align'), command : 'justifyfull', noActive : true},
-		'ol' : {name : __('Insert Ordered List'), command : 'insertorderedlist', tags : ['OL']},
-		'ul' : 	{name : __('Insert Unordered List'), command : 'insertunorderedlist', tags : ['UL']},
-		'subscript' : {name : __('Click to Subscript'), command : 'subscript', tags : ['SUB']},
-		'superscript' : {name : __('Click to Superscript'), command : 'superscript', tags : ['SUP']},
-		'strikethrough' : {name : __('Click to Strike Through'), command : 'strikeThrough', css : {'text-decoration' : 'line-through'}},
-		'removeformat' : {name : __('Remove Formatting'), command : 'removeformat', noActive : true},
-		'indent' : {name : __('Indent Text'), command : 'indent', noActive : true},
-		'outdent' : {name : __('Remove Indent'), command : 'outdent', noActive : true},
-		'hr' : {name : __('Horizontal Rule'), command : 'insertHorizontalRule', noActive : true}
+		'bold' : {name : __('굵게'), command : 'Bold', tags : ['B','STRONG'], css : {'font-weight' : 'bold'}, key : 'b'},
+		'italic' : {name : __('기울게'), command : 'Italic', tags : ['EM','I'], css : {'font-style' : 'italic'}, key : 'i'},
+		'underline' : {name : __('밑줄'), command : 'Underline', tags : ['U'], css : {'text-decoration' : 'underline'}, key : 'u'},
+		'left' : {name : __('왼쪽으로 정렬'), command : 'justifyleft', noActive : true},
+		'center' : {name : __('가운데쪽으로 정렬'), command : 'justifycenter', noActive : true},
+		'right' : {name : __('오른쪽으로 정렬'), command : 'justifyright', noActive : true},
+		'justify' : {name : __('기본으로 정렬'), command : 'justifyfull', noActive : true},
+		'ol' : {name : __('번호 목록'), command : 'insertorderedlist', tags : ['OL']},
+		'ul' : 	{name : __('목록'), command : 'insertunorderedlist', tags : ['UL']},
+		'subscript' : {name : __('아래로 첨자'), command : 'subscript', tags : ['SUB']},
+		'superscript' : {name : __('위로 첨자'), command : 'superscript', tags : ['SUP']},
+		'strikethrough' : {name : __('취소선'), command : 'strikeThrough', css : {'text-decoration' : 'line-through'}},
+		'removeformat' : {name : __('문장 서식 지우기'), command : 'removeformat', noActive : true},
+		'indent' : {name : __('들여쓰기'), command : 'indent', noActive : true},
+		'outdent' : {name : __('들여쓴 것 지우기'), command : 'outdent', noActive : true},
+		'hr' : {name : __('가로 줄'), command : 'insertHorizontalRule', noActive : true}
 	},
-	iconsPath : '../nicEditorIcons.gif',
+	iconsPath : '../nicEditorIcons.png',
 	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor'],
 	iconList : {"xhtml":1,"bgcolor":2,"forecolor":3,"bold":4,"center":5,"hr":6,"indent":7,"italic":8,"justify":9,"left":10,"ol":11,"outdent":12,"removeformat":13,"right":14,"save":25,"strikethrough":16,"subscript":17,"superscript":18,"ul":19,"underline":20,"image":21,"link":22,"unlink":23,"close":24,"arrow":26,"upload":27},
 	initWithLineBreak: true
@@ -1050,9 +1050,9 @@ nicEditors.registerPlugin(nicButtonTips);
  /* START CONFIG */
 var nicSelectOptions = {
 	buttons : {
-		'fontSize' : {name : __('Select Font Size'), type : 'nicEditorFontSizeSelect', command : 'fontsize'},
-		'fontFamily' : {name : __('Select Font Family'), type : 'nicEditorFontFamilySelect', command : 'fontname'},
-		'fontFormat' : {name : __('Select Font Format'), type : 'nicEditorFontFormatSelect', command : 'formatBlock'}
+		'fontSize' : {name : __('글씨 크기'), type : 'nicEditorFontSizeSelect', command : 'fontsize'},
+		'fontFamily' : {name : __('글꼴'), type : 'nicEditorFontFamilySelect', command : 'fontname'},
+		'fontFormat' : {name : __('문장 서식'), type : 'nicEditorFontFormatSelect', command : 'formatBlock'}
 	}
 };
 /* END CONFIG */
@@ -1156,8 +1156,7 @@ var nicEditorFontSizeSelect = nicEditorSelect.extend({
 });
 
 var nicEditorFontFamilySelect = nicEditorSelect.extend({
-	sel : {'arial' : 'Arial','comic sans ms' : 'Comic Sans','courier new' : 'Courier New','georgia' : 'Georgia', 'helvetica' : 'Helvetica', 'impact' : 'Impact', 'times new roman' : 'Times', 'trebuchet ms' : 'Trebuchet', 'verdana' : 'Verdana'},
-
+	sel : { "Gulim,굴림" : "굴림", "궁서" : "궁서", "NanumGothic,나눔고딕": "나눔고딕", "Dotum,돋움" : "돋움", "MalgunGothic,맑은 고딕"	: "맑은고딕", "Arial,arial" : "Arial" };
 	init : function() {
 		this.setDisplay('Font&nbsp;Family...');
 		for(itm in this.sel) {
@@ -1185,8 +1184,8 @@ nicEditors.registerPlugin(nicPlugin,nicSelectOptions);
 /* START CONFIG */
 var nicLinkOptions = {
 	buttons : {
-		'link' : {name : 'Add Link', type : 'nicLinkButton', tags : ['A']},
-		'unlink' : {name : 'Remove Link',  command : 'unlink', noActive : true}
+		'link' : {name : '링크 넣기', type : 'nicLinkButton', tags : ['A']},
+		'unlink' : {name : '링크 지우기',  command : 'unlink', noActive : true}
 	}
 };
 /* END CONFIG */
@@ -1195,17 +1194,17 @@ var nicLinkButton = nicEditorAdvancedButton.extend({
 	addPane : function() {
 		this.ln = this.ne.selectedInstance.selElm().parentTag('A');
 		this.addForm({
-			'' : {type : 'title', txt : 'Add/Edit Link'},
-			'href' : {type : 'text', txt : 'URL', value : 'http://', style : {width: '150px'}},
-			'title' : {type : 'text', txt : 'Title'},
-			'target' : {type : 'select', txt : 'Open In', options : {'' : 'Current Window', '_blank' : 'New Window'},style : {width : '100px'}}
+			'' : {type : 'title', txt : '링크 넣기/지우기'},
+			'href' : {type : 'text', txt : '주소', value : 'http://', style : {width: '150px'}},
+			'title' : {type : 'text', txt : '이름'},
+			'target' : {type : 'select', txt : '열기', options : {'' : '원래 창으로', '_blank' : '새 창으로'},style : {width : '100px'}}
 		},this.ln);
 	},
 
 	submit : function(e) {
 		var url = this.inputs['href'].value;
 		if(url == "http://" || url == "") {
-			alert("You must enter a URL to Create a Link");
+			alert("링크를 넣어주세요.");
 			return false;
 		}
 		this.removePane();
@@ -1241,8 +1240,8 @@ nicEditors.registerPlugin(nicPlugin,nicLinkOptions);
 /* START CONFIG */
 var nicColorOptions = {
 	buttons : {
-		'forecolor' : {name : __('Change Text Color'), type : 'nicEditorColorButton', noClose : true},
-		'bgcolor' : {name : __('Change Background Color'), type : 'nicEditorBgColorButton', noClose : true}
+		'forecolor' : {name : __('글씨 색깔 바꾸기'), type : 'nicEditorColorButton', noClose : true},
+		'bgcolor' : {name : __('글씨 배경 색깔 바꾸기'), type : 'nicEditorBgColorButton', noClose : true}
 	}
 };
 /* END CONFIG */
@@ -1299,7 +1298,7 @@ nicEditors.registerPlugin(nicPlugin,nicColorOptions);
 /* START CONFIG */
 var nicImageOptions = {
 	buttons : {
-		'image' : {name : 'Add Image', type : 'nicImageButton', tags : ['IMG']}
+		'image' : {name : '이미지 넣기', type : 'nicImageButton', tags : ['IMG']}
 	}
 
 };
@@ -1309,17 +1308,17 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 	addPane : function() {
 		this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
 		this.addForm({
-			'' : {type : 'title', txt : 'Add/Edit Image'},
-			'src' : {type : 'text', txt : 'URL', 'value' : 'http://', style : {width: '150px'}},
-			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '100px'}},
-			'align' : {type : 'select', txt : 'Align', options : {none : 'Default','left' : 'Left', 'right' : 'Right'}}
+			'' : {type : 'title', txt : '이미지 넣기/지우기'},
+			'src' : {type : 'text', txt : '주소', 'value' : 'http://', style : {width: '150px'}},
+			'alt' : {type : 'text', txt : '대체 문장', style : {width: '100px'}},
+			'align' : {type : 'select', txt : '정렬', options : {none : '없음','left' : '왼쪽', 'right' : '오른쪽'}}
 		},this.im);
 	},
 
 	submit : function(e) {
 		var src = this.inputs['src'].value;
 		if(src == "" || src == "http://") {
-			alert("You must enter a Image URL to insert");
+			alert("이미지 주소를 넣어주세요.");
 			return false;
 		}
 		this.removePane();
@@ -1372,7 +1371,7 @@ nicEditors.registerPlugin(nicPlugin,nicSaveOptions);
 /* START CONFIG */
 var nicUploadOptions = {
 	buttons : {
-		'upload' : {name : 'Upload Image', type : 'nicUploadButton'}
+		'upload' : {name : '이미지 올리기', type : 'nicUploadButton'}
 	}
 
 };
@@ -1731,7 +1730,7 @@ nicEditor = nicEditor.extend({
 /* START CONFIG */
 var nicCodeOptions = {
 	buttons : {
-		'xhtml' : {name : 'Edit HTML', type : 'nicCodeButton'}
+		'xhtml' : {name : 'HTML 편집', type : 'nicCodeButton'}
 	}
 
 };
@@ -1742,7 +1741,7 @@ var nicCodeButton = nicEditorAdvancedButton.extend({
 
 	addPane : function() {
 		this.addForm({
-			'' : {type : 'title', txt : 'Edit HTML'},
+			'' : {type : 'title', txt : 'HTML 편집'},
 			'code' : {type : 'content', 'value' : this.ne.selectedInstance.getContent(), style : {width: '340px', height : '200px'}}
 		});
 	},
