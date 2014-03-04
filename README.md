@@ -1,6 +1,8 @@
 NicEdit KR
 ==========
-가볍고, 크로스 플랫폼의 위지윅 에디터, NicEdit의 한국어버전입니다.
+가볍고, 크로스 플랫폼의 위지윅 에디터, NicEdit의 비공식 한국어버전입니다.
+
+![ScreenShot](https://raw.github.com/XKY/NicEdit-Korean/master/nicEditorIcons.png)
 
 (This is unofficial Korean version of NicEdit)
 
