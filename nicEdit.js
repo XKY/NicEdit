@@ -5,6 +5,15 @@
  * For more information visit http://nicedit.com/
  * Do not remove this copyright message
  */
+var ICON_PATH = "../nicEditorIcons.png";
+var FONT_FAMILY = {
+	"Gulim,굴림"			: "굴림",
+	"궁서"					: "궁서",
+	"NanumGothic,나눔고딕"	: "나눔고딕",
+	"Dotum,돋움"			: "돋움",
+	"MalgunGothic,맑은 고딕"	: "맑은고딕",
+	"Arial,arial"			: "Arial"
+};
 var bkExtend = function(){
 	var args = arguments;
 	if (args.length == 1) args = [this, args[0]];
@@ -268,7 +277,7 @@ var nicEditorConfig = bkClass.extend({
 		'outdent' : {name : __('들여쓴 것 지우기'), command : 'outdent', noActive : true},
 		'hr' : {name : __('가로 줄'), command : 'insertHorizontalRule', noActive : true}
 	},
-	iconsPath : '../nicEditorIcons.png',
+	iconsPath : ICON_PATH,
 	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor'],
 	iconList : {"xhtml":1,"bgcolor":2,"forecolor":3,"bold":4,"center":5,"hr":6,"indent":7,"italic":8,"justify":9,"left":10,"ol":11,"outdent":12,"removeformat":13,"right":14,"save":25,"strikethrough":16,"subscript":17,"superscript":18,"ul":19,"underline":20,"image":21,"link":22,"unlink":23,"close":24,"arrow":26,"upload":27},
 	initWithLineBreak: true
@@ -611,7 +620,7 @@ var nicEditorIFrameInstance = nicEditorInstance.extend({
 		fd.designMode = "on";
 		fd.open();
 		var css = this.ne.options.externalCSS;
-		fd.write('<html><head>'+((css) ? '<link href="'+css+'" rel="stylesheet" type="text/css" />' : '')+'</head><body id="nicEditContent" style="margin: 0 !important; background-color: transparent !important;">'+this.initialContent+'</body></html>');
+		fd.write('<!doctype html><html><head><meta charset-"utf-8"/>'+((css) ? '<link href="'+css+'" rel="stylesheet" type="text/css" />' : '')+'</head><body id="nicEditContent" style="margin: 0 !important; background-color:white!important; color:black;">'+this.initialContent+'</body></html>');
 		fd.close();
 		this.frameDoc = fd;
 
@@ -1069,7 +1078,7 @@ var nicEditorSelect = bkClass.extend({
 		this.contain = new bkElement('div').setStyle({width: '90px', height : '20px', cursor : 'pointer', overflow: 'hidden'}).addClass('selectContain').addEvent('click',this.toggle.closure(this)).appendTo(this.margin);
 		this.items = new bkElement('div').setStyle({overflow : 'hidden', zoom : 1, border: '1px solid #ccc', paddingLeft : '3px', backgroundColor : '#fff'}).appendTo(this.contain);
 		this.control = new bkElement('div').setStyle({overflow : 'hidden', 'float' : 'right', height: '18px', width : '16px'}).addClass('selectControl').setStyle(this.ne.getIcon('arrow',options)).appendTo(this.items);
-		this.txt = new bkElement('div').setStyle({overflow : 'hidden', 'float' : 'left', width : '66px', height : '14px', marginTop : '1px', fontFamily : 'sans-serif', textAlign : 'center', fontSize : '12px'}).addClass('selectTxt').appendTo(this.items);
+		this.txt = new bkElement('div').setStyle({overflow : 'hidden', 'float' : 'left', width : '66px', height : '14px', marginTop : '1px', fontFamily : 'arial', textAlign : 'center', fontSize : '12px'}).addClass('selectTxt').appendTo(this.items);
 
 		if(!window.opera) {
 			this.contain.onmousedown = this.control.onmousedown = this.txt.onmousedown = bkLib.cancelEvent;
@@ -1148,7 +1157,7 @@ var nicEditorSelect = bkClass.extend({
 var nicEditorFontSizeSelect = nicEditorSelect.extend({
 	sel : {1 : '1&nbsp;(8pt)', 2 : '2&nbsp;(10pt)', 3 : '3&nbsp;(12pt)', 4 : '4&nbsp;(14pt)', 5 : '5&nbsp;(18pt)', 6 : '6&nbsp;(24pt)'},
 	init : function() {
-		this.setDisplay('Font&nbsp;Size...');
+		this.setDisplay('<font color="black" size="1">크기</font>');
 		for(itm in this.sel) {
 			this.add(itm,'<font size="'+itm+'">'+this.sel[itm]+'</font>');
 		}
@@ -1156,9 +1165,10 @@ var nicEditorFontSizeSelect = nicEditorSelect.extend({
 });
 
 var nicEditorFontFamilySelect = nicEditorSelect.extend({
-	sel : { "Gulim,굴림" : "굴림", "궁서" : "궁서", "NanumGothic,나눔고딕": "나눔고딕", "Dotum,돋움" : "돋움", "MalgunGothic,맑은 고딕"	: "맑은고딕", "Arial,arial" : "Arial" };
+	sel : FONT_FAMILY,
+
 	init : function() {
-		this.setDisplay('Font&nbsp;Family...');
+		this.setDisplay('<font color="black" size="1">글꼴</font>');
 		for(itm in this.sel) {
 			this.add(itm,'<font face="'+itm+'">'+this.sel[itm]+'</font>');
 		}
@@ -1169,7 +1179,7 @@ var nicEditorFontFormatSelect = nicEditorSelect.extend({
 		sel : {'p' : 'Paragraph', 'pre' : 'Pre', 'h6' : 'Heading&nbsp;6', 'h5' : 'Heading&nbsp;5', 'h4' : 'Heading&nbsp;4', 'h3' : 'Heading&nbsp;3', 'h2' : 'Heading&nbsp;2', 'h1' : 'Heading&nbsp;1'},
 
 	init : function() {
-		this.setDisplay('Font&nbsp;Format...');
+		this.setDisplay('서식');
 		for(itm in this.sel) {
 			var tag = itm.toUpperCase();
 			this.add('<'+tag+'>','<'+itm+' style="padding: 0px; margin: 0px;">'+this.sel[itm]+'</'+tag+'>');
@@ -1197,7 +1207,7 @@ var nicLinkButton = nicEditorAdvancedButton.extend({
 			'' : {type : 'title', txt : '링크 넣기/지우기'},
 			'href' : {type : 'text', txt : '주소', value : 'http://', style : {width: '150px'}},
 			'title' : {type : 'text', txt : '이름'},
-			'target' : {type : 'select', txt : '열기', options : {'' : '원래 창으로', '_blank' : '새 창으로'},style : {width : '100px'}}
+			'target' : {type : 'select', txt : '열기', options : {'' : '기존 창으로', '_blank' : '새 창으로'},style : {width : '100px'}}
 		},this.ln);
 	},
 
@@ -1371,7 +1381,7 @@ nicEditors.registerPlugin(nicPlugin,nicSaveOptions);
 /* START CONFIG */
 var nicUploadOptions = {
 	buttons : {
-		'upload' : {name : '이미지 올리기', type : 'nicUploadButton'}
+		'upload' : {name : '이미지 업로드', type : 'nicUploadButton'}
 	}
 
 };
@@ -1737,12 +1747,12 @@ var nicCodeOptions = {
 /* END CONFIG */
 
 var nicCodeButton = nicEditorAdvancedButton.extend({
-	width : '350px',
+	width : '600px',
 
 	addPane : function() {
 		this.addForm({
 			'' : {type : 'title', txt : 'HTML 편집'},
-			'code' : {type : 'content', 'value' : this.ne.selectedInstance.getContent(), style : {width: '340px', height : '200px'}}
+			'code' : {type : 'content', 'value' : this.ne.selectedInstance.getContent(), style : {width: '595px', height : '400px'}}
 		});
 	},
 
@@ -1752,7 +1762,4 @@ var nicCodeButton = nicEditorAdvancedButton.extend({
 		this.removePane();
 	}
 });
-
 nicEditors.registerPlugin(nicPlugin,nicCodeOptions);
-
-
